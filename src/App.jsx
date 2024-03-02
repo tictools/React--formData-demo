@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <div className="main">
-      <MainHeader textContent="React controlled form" />
+      <MainHeader textContent="React form using formData" />
       <div className="wrapper">
         <Section>
           <SectionHeader textContent="New register" />
