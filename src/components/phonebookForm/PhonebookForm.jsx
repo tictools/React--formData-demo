@@ -1,45 +1,42 @@
-import { INITIAL_INPUT_VALUE } from "../../hooks";
+import { INITIAL_INPUT_VALUE } from "../../hooks/constants";
 import { Button, ButtonSet } from "../shared";
 
 export const PhonebookForm = ({
-  nameValue,
-  phoneValue,
-  updatePersonChange,
-  updatePhoneChange,
   updatePersons,
 }) => {
-  const onPersonChange = (event) => updatePersonChange(event?.target?.value);
-  const onPhoneChange = (event) => updatePhoneChange(event?.target?.value);
-
-  const resetInputValues = () => {
-    updatePersonChange(INITIAL_INPUT_VALUE);
-    updatePhoneChange(INITIAL_INPUT_VALUE);
+  const resetFormValuesFor = ({ inputName, inputPhone }) => {
+    inputName.value = INITIAL_INPUT_VALUE;
+    inputPhone.value = INITIAL_INPUT_VALUE;
   };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    updatePersons({ name: nameValue, phone: phoneValue });
-    resetInputValues();
+
+    const { target: form } = event;
+    const { name: inputName, phone: inputPhone } = form;
+
+    const formData = new FormData(form);
+    const name = formData.get("name");
+    const phone = formData.get("phone");
+
+    updatePersons({ name, phone });
+    resetFormValuesFor({ inputName, inputPhone });
   };
 
   return (
     <form className="form" onSubmit={onFormSubmit}>
       <input
-        id="name"
         className="form__input"
-        type="text"
+        name="name"
         placeholder="Insert a name..."
-        value={nameValue}
-        onChange={onPersonChange}
+        type="text"
         required
       />
       <input
-        id="phone"
         className="form__input"
-        type="text"
+        name="phone"
         placeholder="Insert a phone number..."
-        value={phoneValue}
-        onChange={onPhoneChange}
+        type="text"
         required
       />
       <ButtonSet>

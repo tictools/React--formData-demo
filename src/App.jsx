@@ -5,28 +5,20 @@ import { WarningModal } from "./components/modal";
 import { PhoneBook } from "./components/phonebook";
 import { PhonebookForm } from "./components/phonebookForm";
 import { MainHeader, Section, SectionHeader } from "./components/shared";
-import { useFilterForm, useForm, usePersons } from "./hooks";
+import { useFilterForm, usePersons } from "./hooks";
 
 const App = () => {
   const { filterValue, handleChangeFilter } = useFilterForm();
   const { persons, handleUpdatePersons, warningState, updateWarningStateWith } =
     usePersons({ filterValue });
-  const { newPerson, newPhone, handlePersonChange, handlePhoneChange } =
-    useForm();
 
   return (
     <div className="main">
       <MainHeader textContent="React controlled form" />
-      <dix className="wrapper">
+      <div className="wrapper">
         <Section>
           <SectionHeader textContent="New register" />
-          <PhonebookForm
-            nameValue={newPerson}
-            phoneValue={newPhone}
-            updatePersonChange={handlePersonChange}
-            updatePhoneChange={handlePhoneChange}
-            updatePersons={handleUpdatePersons}
-          />
+          <PhonebookForm updatePersons={handleUpdatePersons} />
         </Section>
         <Section>
           <SectionHeader textContent="Phonebook" />
@@ -36,7 +28,7 @@ const App = () => {
           />
           <PhoneBook persons={persons} />
         </Section>
-      </dix>
+      </div>
       <WarningModal
         updateWarningStateWith={updateWarningStateWith}
         warningState={warningState}
