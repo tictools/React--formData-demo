@@ -1,8 +1,7 @@
 import { INITIAL_INPUT_VALUE } from "../../hooks";
 
 export const FilterForm = ({ filterValue, updateFilterValue }) => {
-  const onFilterChange = (event) =>
-    updateFilterValue(event?.target?.value.trim());
+  const onFilterChange = (event) => updateFilterValue(event.target.value);
 
   const resetFilter = () => updateFilterValue(INITIAL_INPUT_VALUE);
 
@@ -20,9 +19,12 @@ export const FilterForm = ({ filterValue, updateFilterValue }) => {
         value={filterValue}
         onChange={onFilterChange}
       />
-      <button className="filter-form__reset" onClick={resetFilter}>
-        ⛌
-      </button>
+      <input
+        className="filter-form__reset"
+        type="button"
+        value="⛌"
+        onClick={resetFilter}
+      />
     </form>
   );
 };

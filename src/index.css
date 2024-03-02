@@ -136,10 +136,10 @@ body {
 }
 
 .filter-form__input {
-  background-color: transparent;
   padding: 1rem;
   height: 2rem;
   width: 10rem;
+  background-color: transparent;
   border: none;
   color: var(--color-grey-75);
 
@@ -150,13 +150,21 @@ body {
 
 .filter-form__reset {
   padding: 0 0.5rem;
+  height: 1.5rem;
+  border: none;
   border-left: 1px solid var(--color-grey-50);
+  background-color: transparent;
   color: var(--color-grey-50);
+  outline: none;
 }
 
-.filter-form__reset:hover {
+.filter-form__reset:hover,
+.filter-form__reset:focus {
   cursor: pointer;
-  color: var(--color-grey-75);
+  background-color: var(--color-danger-secondary);
+  border-left-color: transparent;
+  border-radius: 0.25rem;
+  color: var(--color-grey-25);
   font-weight: 600;
 }
 
