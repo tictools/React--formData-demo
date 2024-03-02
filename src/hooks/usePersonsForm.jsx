@@ -2,17 +2,19 @@ import { useState } from "react";
 import { getInitialState } from "../data/initialState";
 import { isPersonRegistered } from "../helpers";
 import { INITIAL_WARNING_STATE } from "./constants";
+import { useFilterForm } from "./useFilterForm";
 import { useWarningState } from "./useWarningState";
 
-export const usePersons = ({ filterValue }) => {
+export const usePersonsForm = () => {
   const [persons, setPersons] = useState(getInitialState());
-  const { warningState, updateWarningStateWith } = useWarningState(
+  const { filterValue, handleUpdateFilter } = useFilterForm();
+  const { warningState, handleUpdateWarningStateWith } = useWarningState(
     INITIAL_WARNING_STATE
   );
 
   const handleUpdatePersons = ({ name, phone }) => {
     if (isPersonRegistered(persons, name)) {
-      updateWarningStateWith({
+      handleUpdateWarningStateWith({
         name,
         isVisible: true,
       });
@@ -37,7 +39,9 @@ export const usePersons = ({ filterValue }) => {
   return {
     persons: filteredPersons,
     handleUpdatePersons,
+    filterValue,
+    handleUpdateFilter,
     warningState,
-    updateWarningStateWith,
+    handleUpdateWarningStateWith,
   };
 };

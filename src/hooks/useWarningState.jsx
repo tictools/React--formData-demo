@@ -3,9 +3,9 @@ import { useState } from "react";
 export const useWarningState = (initialValue) => {
   const [warningState, setWarningState] = useState(initialValue);
 
-  const updateWarningStateWith = ({ name, isVisible }) => {
+  const handleUpdateWarningStateWith = ({ name, isVisible }) => {
     setWarningState((prevWarningState) => {
-      return {
+    return {
         ...prevWarningState,
         name,
         isVisible,
@@ -15,6 +15,6 @@ export const useWarningState = (initialValue) => {
 
   return {
     warningState,
-    updateWarningStateWith,
+    handleUpdateWarningStateWith,
   };
 };
