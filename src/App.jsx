@@ -5,12 +5,17 @@ import { WarningModal } from "./components/modal";
 import { PhoneBook } from "./components/phonebook";
 import { PhonebookForm } from "./components/phonebookForm";
 import { MainHeader, Section, SectionHeader } from "./components/shared";
-import { useFilterForm, usePersons } from "./hooks";
+import { usePersonsForm } from "./hooks";
 
 const App = () => {
-  const { filterValue, handleChangeFilter } = useFilterForm();
-  const { persons, handleUpdatePersons, warningState, updateWarningStateWith } =
-    usePersons({ filterValue });
+  const {
+    persons,
+    handleUpdatePersons,
+    filterValue,
+    handleUpdateFilter,
+    warningState,
+    handleUpdateWarningStateWith,
+  } = usePersonsForm();
 
   return (
     <div className="main">
@@ -24,13 +29,13 @@ const App = () => {
           <SectionHeader textContent="Phonebook" />
           <FilterForm
             filterValue={filterValue}
-            updateFilterValue={handleChangeFilter}
+            updateFilterValue={handleUpdateFilter}
           />
           <PhoneBook persons={persons} />
         </Section>
       </div>
       <WarningModal
-        updateWarningStateWith={updateWarningStateWith}
+        updateWarningStateWith={handleUpdateWarningStateWith}
         warningState={warningState}
       />
     </div>
